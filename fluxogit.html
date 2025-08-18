@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Guia Rápido Git & GitHub — do zero ao primeiro push</title>
+  <meta name="description" content="Guia prático em HTML para iniciar um repositório Git, fazer o primeiro commit e enviar ao GitHub. Inclui comandos, fluxo de trabalho diário e correções de erros comuns." />
+  <style>
+    :root{
+      --bg: #0b0d12;
+      --card: #11151c;
+      --muted: #8892a6;
+      --text: #e6eefb;
+      --accent: #7aa2f7;
+      --accent-2: #9ece6a;
+      --danger: #ff7a90;
+      --border: #1f2430;
+    }
+    *{box-sizing:border-box}
+    html,body{margin:0;padding:0;background:var(--bg);color:var(--text);font:16px/1.6 system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji"}
+    a{color:var(--accent);text-decoration:none}
+    a:hover{text-decoration:underline}
+    .container{max-width:1000px;margin:0 auto;padding:24px}
+    header{position:sticky;top:0;background:linear-gradient(180deg, rgba(11,13,18,.95), rgba(11,13,18,.75));backdrop-filter: blur(6px);border-bottom:1px solid var(--border);z-index:10}
+    header .inner{max-width:1000px;margin:0 auto;padding:14px 24px;display:flex;gap:16px;align-items:center;justify-content:space-between}
+    .brand{display:flex;gap:12px;align-items:center}
+    .logo{width:28px;height:28px;border-radius:8px;background:conic-gradient(from 180deg, var(--accent), var(--accent-2));box-shadow:0 0 0 2px #0006}
+    .title{font-weight:700;letter-spacing:.3px}
+    nav{display:flex;gap:12px;flex-wrap:wrap}
+    nav a{padding:8px 12px;border:1px solid var(--border);border-radius:10px;background:rgba(255,255,255,.02)}
+    main{padding-top:16px}
+    .hero{background:linear-gradient(180deg, rgba(122,162,247,.08), transparent);border:1px solid var(--border);padding:24px;border-radius:18px;margin:16px 0}
+    .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px}
+    .card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:18px}
+    .card h3{margin:.2rem 0 .6rem}
+    h1{font-size:1.8rem;margin:0}
+    h2{margin-top:2rem}
+    h3{margin-top:1.2rem}
+    code, pre{font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace}
+    pre{position:relative;background:#0a0f17;border:1px solid var(--border);padding:14px 44px 14px 14px;border-radius:12px;overflow:auto}
+    .copy{position:absolute;right:8px;top:8px;border:1px solid var(--border);background:#0e1420;color:var(--text);padding:6px 10px;border-radius:8px;cursor:pointer}
+    .copy.ok{outline:2px solid var(--accent-2)}
+    .badge{display:inline-block;font-size:.8rem;border:1px solid var(--border);padding:2px 8px;border-radius:999px;background:rgba(255,255,255,.04);color:var(--muted)}
+    .tip{border-left:3px solid var(--accent);background:rgba(122,162,247,.08);padding:12px 12px;margin:12px 0;border-radius:8px}
+    .warn{border-left:3px solid var(--danger);background:rgba(255,122,144,.08)}
+    .grid-2{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}
+    footer{margin:32px 0 16px;color:var(--muted);font-size:.9rem}
+    .toc{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+    .toc a{font-size:.9rem}
+    .kbd{font-weight:600;background:#0a0f17;border:1px solid var(--border);padding:0 6px;border-radius:6px}
+    .small{font-size:.92rem;color:var(--muted)}
+  </style>
+</head>
+<body>
+  <header>
+    <div class="inner">
+      <div class="brand"><div class="logo"></div><div class="title">Guia Rápido Git & GitHub</div></div>
+      <nav>
+        <a href="#fluxo">Fluxo Completo</a>
+        <a href="#resumo">Resumo Rápido</a>
+        <a href="#erros">Erros Comuns</a>
+        <a href="#boas-praticas">Boas Práticas</a>
+        <a href="#glossario">Glossário</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="hero">
+      <h1>Git & GitHub — do zero ao primeiro <em>push</em></h1>
+      <p class="small">Feito para consulta rápida dentro do seu projeto. Copie e cole os blocos de comando conforme precisar.</p>
+      <div class="toc">
+        <span class="badge">Iniciante</span>
+        <span class="badge">Hands-on</span>
+        <span class="badge">HTML5</span>
+      </div>
+    </section>
+
+    <section id="pre-requisitos" class="card">
+      <h2>0) Pré‑requisitos</h2>
+      <ul>
+        <li>Ter o Git instalado.</li>
+        <li>Configurar seu nome e email (aparece nos commits):</li>
+      </ul>
+      <pre><button class="copy" aria-label="Copiar">Copiar</button><code>git config --global user.name "Seu Nome"
+git config --global user.email "seuemail@exemplo.com"</code></pre>
+      <div class="tip">Você pode verificar as configs com <span class="kbd">git config --list</span>.</div>
+    </section>
+
+    <section id="fluxo" class="card">
+      <h2>1) Fluxo Completo (do zero ao GitHub)</h2>
+      <ol>
+        <li>
+          <h3>Inicializar repositório</h3>
+          <pre><button class="copy" aria-label="Copiar">Copiar</button><code>git init</code></pre>
+        </li>
+        <li>
+          <h3>Ver status e adicionar arquivos</h3>
+          <pre><button class="copy" aria-label="Copiar">Copiar</button><code>git status
+# Adiciona tudo
+git add .
+# ou arquivos específicos
+# git add index.html styles.css</code></pre>
+        </li>
+        <li>
+          <h3>Fazer o primeiro commit</h3>
+          <pre><button class="copy" aria-label="Copiar">Copiar</button><code>git commit -m "Primeiro commit: estrutura inicial"</code></pre>
+          <div class="tip">Mensagens curtas, no imperativo e descritivas: “Adiciona…”, “Ajusta…”, “Corrige…”.</div>
+        </li>
+        <li>
+          <h3>Garantir a branch principal como <code>main</code></h3>
+          <pre><button class="copy" aria-label="Copiar">Copiar</button><code>git branch -M main</code></pre>
+        </li>
+        <li>
+          <h3>Conectar ao repositório no GitHub</h3>
+          <pre><button class="copy" aria-label="Copiar">Copiar</button><code># HTTPS (simples)
+git remote add origin https://github.com/SEU_USUARIO/NOME_DO_REPO.git
+
+# Se já existia um origin errado, ajuste:
+# git remote set-url origin https://github.com/SEU_USUARIO/NOME_DO_REPO.git
+
+# Conferir remotes
+# git remote -v</code></pre>
+        </li>
+        <li>
+          <h3>Enviar a branch principal</h3>
+          <pre><button class="copy" aria-label="Copiar">Copiar</button><code>git push -u origin main</code></pre>
+        </li>
+        <li>
+          <h3>Fluxo do dia a dia</h3>
+          <pre><button class="copy" aria-label="Copiar">Copiar</button><code># Após editar arquivos
+git status
+git add .
+git commit -m "Mensagem do que mudou"
+
+# Enviar
+git push</code></pre>
+        </li>
+        <li>
+          <h3>Atualizar local se houve mudança no GitHub</h3>
+          <pre><button class="copy" aria-label="Copiar">Copiar</button><code>git pull origin main</code></pre>
+        </li>
+      </ol>
+    </section>
+
+    <section id="resumo" class="card">
+      <h2>2) Resumo rápido (cola)</h2>
+      <pre><button class="copy" aria-label="Copiar">Copiar</button><code>git init
+git add .
+git commit -m "Primeiro commit"
+git branch -M main
+git remote add origin https://github.com/SEU_USUARIO/NOME_DO_REPO.git
+git push -u origin main</code></pre>
+      <div class="grid-2">
+        <div class="tip">Depois: <span class="kbd">git add .</span> → <span class="kbd">git commit -m "…"</span> → <span class="kbd">git push</span>.</div>
+        <div class="tip">Se houver mudanças no remoto: <span class="kbd">git pull origin main</span>.</div>
+      </div>
+    </section>
+
+    <section id="erros" class="card">
+      <h2>3) Erros comuns e como resolver</h2>
+
+      <h3 class="warn">A) <code>error: remote origin already exists.</code></h3>
+      <p>Já existe um remoto chamado <code>origin</code>. Veja o que tem e troque a URL se necessário.</p>
+      <pre><button class="copy" aria-label="Copiar">Copiar</button><code>git remote -v
+# Se estiver errado:
+git remote set-url origin https://github.com/SEU_USUARIO/NOME_DO_REPO.git</code></pre>
+
+      <h3 class="warn">B) <code>error: src refspec main does not match any</code></h3>
+      <p>Você ainda não tem nenhum commit na <code>main</code>. Crie um commit e tente novamente.</p>
+      <pre><button class="copy" aria-label="Copiar">Copiar</button><code>git add .
+git commit -m "Primeiro commit"
+.git branch -M main
+.git push -u origin main</code></pre>
+
+      <h3 class="warn">C) Autenticação (HTTPS pedindo login/senha)</h3>
+      <p>Use um <em>Personal Access Token</em> no lugar da senha ao usar HTTPS.</p>
+      <pre><button class="copy" aria-label="Copiar">Copiar</button><code># Forma rápida de salvar as credenciais (Windows/Mac):
+git config --global credential.helper manager</code></pre>
+    </section>
+
+    <section id="boas-praticas" class="card">
+      <h2>4) Boas práticas de commits</h2>
+      <ul>
+        <li>Use mensagens no imperativo: “Adiciona X”, “Ajusta Y”, “Remove Z”.</li>
+        <li>Um commit por assunto: facilite revert e revisão.</li>
+        <li>Antes de commitar: <span class="kbd">git status</span> e <span class="kbd">git diff</span>.</li>
+      </ul>
+      <pre><button class="copy" aria-label="Copiar">Copiar</button><code># Exemplos de mensagem
+"Adiciona layout inicial da página"
+"Corrige caminho das imagens no index"
+"Ajusta CSS para responsividade em mobile"</code></pre>
+    </section>
+
+    <section id="glossario" class="card">
+      <h2>5) Glossário rápido</h2>
+      <ul>
+        <li><strong>Repositório</strong>: pasta com histórico versionado.</li>
+        <li><strong>Staging area</strong>: área de preparação do que vai pro commit.</li>
+        <li><strong>Commit</strong>: fotografia (snapshot) das mudanças.</li>
+        <li><strong>Remote</strong>: referência para um repositório hospedado (ex.: GitHub).</li>
+        <li><strong>Branch</strong>: linha de desenvolvimento paralela.</li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2>6) Atalhos úteis</h2>
+      <pre><button class="copy" aria-label="Copiar">Copiar</button><code># Ver somente arquivos alterados
+git status -s
+
+# Ver o que mudou antes de commitar
+git diff
+
+# Ver histórico compacto
+git log --oneline --graph --decorate --all</code></pre>
+    </section>
+
+    <footer>
+      Feito por você para você ✨ — Cole este arquivo como <strong>index.html</strong> ou dentro de uma página separada do seu projeto.
+    </footer>
+  </main>
+
+  <script>
+    // Adiciona botões de copiar em todos os blocos <pre><code>
+    document.querySelectorAll('pre').forEach(function(pre){
+      const btn = pre.querySelector('.copy');
+      if(!btn) return;
+      btn.addEventListener('click', async function(){
+        const code = pre.querySelector('code').innerText;
+        try{
+          await navigator.clipboard.writeText(code);
+          btn.classList.add('ok');
+          btn.textContent = 'Copiado!';
+          setTimeout(()=>{btn.classList.remove('ok');btn.textContent='Copiar';}, 1200);
+        }catch(e){
+          btn.textContent = 'Falhou :('; setTimeout(()=>btn.textContent='Copiar', 1200);
+        }
+      });
+    });
+  </script>
+</body>
+</html>
