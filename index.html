@@ -1,65 +1,141 @@
 <!DOCTYPE html>
+<!-- Define o tipo de documento como HTML5 -->
 
 <html lang="en">
-  <head>
+<!-- A tag raiz do documento, com atributo "lang" indicando que o idioma é inglês -->
 
+  <head>
     <title>CatPhotoApp</title>
+    <!-- Título da página que aparece na aba do navegador -->
   </head>
-<body>
+
+  <body>
+  <!-- Tudo que é visível ao usuário fica dentro da tag <body> -->
+
     <main>
+    <!-- Conteúdo principal da página -->
+
       <h1>CatPhotoApp</h1>
+      <!-- Título principal da página -->
+
       <section>
+      <!-- Primeira seção: Fotos de gatos -->
+
         <h2>Cat Photos</h2>
-        <p>Everyone loves <a href="https://cdn.freecodecamp.org/curriculum/cat-photo-app/running-cats.jpg">cute cats</a> online!</p>
-        <p>See more <a target="_blank" href="https://freecatphotoapp.com">cat photos</a> in our gallery.</p>
-        <a href="https://freecatphotoapp.com"><img src="https://cdn.freecodecamp.org/curriculum/cat-photo-app/relaxing-cat.jpg" alt="A cute orange cat lying on its back."></a>
+        <!-- Subtítulo da seção -->
+
+        <p>
+          Everyone loves 
+          <a href="https://cdn.freecodecamp.org/curriculum/cat-photo-app/running-cats.jpg">cute cats</a> online!
+        </p>
+        <!-- Parágrafo com link (âncora) para uma imagem externa -->
+
+        <p>
+          See more 
+          <a target="_blank" href="https://freecatphotoapp.com">cat photos</a> in our gallery.
+        </p>
+        <!-- Outro parágrafo, com link que abre em nova aba (target="_blank") -->
+
+        <a href="https://freecatphotoapp.com">
+          <img src="https://cdn.freecodecamp.org/curriculum/cat-photo-app/relaxing-cat.jpg" 
+               alt="A cute orange cat lying on its back.">
+        </a>
+        <!-- Imagem de um gato dentro de um link. "alt" descreve a imagem -->
       </section>
+
       <section>
+      <!-- Segunda seção: listas de gatos -->
+
         <h2>Cat Lists</h2>
+        <!-- Subtítulo da seção -->
+
         <h3>Things cats love:</h3>
+        <!-- Subtítulo menor -->
+
         <ul>
+          <!-- Lista não ordenada (bullet points) -->
           <li>catnip</li>
           <li>laser pointers</li>
           <li>lasagna</li>
         </ul>
+
         <figure>
-          <img src="https://cdn.freecodecamp.org/curriculum/cat-photo-app/lasagna.jpg" alt="A slice of lasagna on a plate.">
+          <!-- Figura com imagem e legenda -->
+          <img src="https://cdn.freecodecamp.org/curriculum/cat-photo-app/lasagna.jpg" 
+               alt="A slice of lasagna on a plate.">
           <figcaption>Cats <em>love</em> lasagna.</figcaption>  
+          <!-- <em> dá ênfase ao texto (itálico por padrão) -->
         </figure>
+
         <h3>Top 3 things cats hate:</h3>
+
         <ol>
+          <!-- Lista ordenada (numerada) -->
           <li>flea treatment</li>
           <li>thunder</li>
           <li>other cats</li>
         </ol>
+
         <figure>
-          <img src="https://cdn.freecodecamp.org/curriculum/cat-photo-app/cats.jpg" alt="Five cats looking around a field.">
+          <img src="https://cdn.freecodecamp.org/curriculum/cat-photo-app/cats.jpg" 
+               alt="Five cats looking around a field.">
           <figcaption>Cats <strong>hate</strong> other cats.</figcaption>  
+          <!-- <strong> dá destaque ao texto (negrito por padrão) -->
         </figure>
       </section>
+
       <section>
+      <!-- Terceira seção: Formulário -->
+
         <h2>Cat Form</h2>
+
         <form action="https://freecatphotoapp.com/submit-cat-photo">
+        <!-- Formulário que envia dados para a URL definida em "action" -->
+
           <fieldset>
+            <!-- Agrupa inputs relacionados -->
             <legend>Is your cat an indoor or outdoor cat?</legend>
-            <label><input id="indoor" type="radio" name="indoor-outdoor" value="indoor" checked> Indoor</label>
-            <label><input id="outdoor" type="radio" name="indoor-outdoor" value="outdoor"> Outdoor</label>
+            <!-- Legenda do grupo -->
+
+            <label>
+              <input id="indoor" type="radio" name="indoor-outdoor" value="indoor" checked> Indoor
+            </label>
+            <!-- Botão de opção (radio). "checked" define como já selecionado -->
+
+            <label>
+              <input id="outdoor" type="radio" name="indoor-outdoor" value="outdoor"> Outdoor
+            </label>
           </fieldset>
+
           <fieldset>
             <legend>What's your cat's personality?</legend>
-            <input id="loving" type="checkbox" name="personality" value="loving" checked> <label for="loving">Loving</label>
-            <input id="lazy" type="checkbox" name="personality" value="lazy"> <label for="lazy">Lazy</label>
-            <input id="energetic" type="checkbox" name="personality" value="energetic"> <label for="energetic">Energetic</label>
+
+            <input id="loving" type="checkbox" name="personality" value="loving" checked>
+            <label for="loving">Loving</label>
+            <!-- Checkbox (pode marcar vários). O "for" no label associa ao id -->
+
+            <input id="lazy" type="checkbox" name="personality" value="lazy">
+            <label for="lazy">Lazy</label>
+
+            <input id="energetic" type="checkbox" name="personality" value="energetic">
+            <label for="energetic">Energetic</label>
           </fieldset>
+
           <input type="text" name="catphotourl" placeholder="cat photo URL" required>
+          <!-- Campo de texto obrigatório com placeholder -->
+
           <button type="submit">Submit</button>
+          <!-- Botão para enviar o formulário -->
         </form>
       </section>
     </main>
+
     <footer>
+    <!-- Rodapé da página -->
       <p>
         No Copyright - <a href="https://www.freecodecamp.org">freeCodeCamp.org</a>
       </p>
     </footer>
+
   </body>
 </html>
